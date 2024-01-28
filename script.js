@@ -76,6 +76,18 @@ const countdown = () => { // como e uma funcao que foi criada dentro de uma cons
     if(tempSeconds <= 0) {
         musicTime.play();
         alert('tempo finalizado');
+        if(focusBt) {
+            tempSeconds = 1500
+        }else if(shortBt) {
+            tempSeconds = 300
+        }else {
+            tempSeconds = 900
+        }
+        const focoActive = html.getAttribute('data-contexto') == 'foco'
+        if(focoActive) {
+            const event = new CustomEvent('FocoFinish')
+            document.dispatchEvent(event)
+        }
         reset()
         IconPlay.setAttribute('src', `/imagens/play_arrow.png`);
         return;
